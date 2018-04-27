@@ -3,8 +3,11 @@
   "version": "1.2.1",
   "description": "This is a JavaScript Client Library for the DetectLanguage Service API",
   "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -24,5 +27,9 @@
   "homepage": "https://github.com/detectlanguage/detectlanguage-node",
   "dependencies": {
     "request": "^2.53.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1"
   }
 }
