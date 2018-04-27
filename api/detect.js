@@ -17,6 +17,7 @@
 'use strict';
 
 var utils = require('../lib/utils');
+var APIRequest = require('../lib/apirequest');
 
 var API = {};
 
@@ -29,33 +30,20 @@ var API = {};
  */
 API.detect = function (params, callback) {
 
-    var isSimple = ! Array.isArray(params.data);
-
     var options = utils.extend({}, this.options, {
             service: 'detect',
             method: 'POST'
         }
     )
 
-    if(isSimple) {
-        params = {
-            options: options,
-            params: {
-                json: { q: params }
-            }
-        };
-    }
-    else {
-        params = {
-            options: options,
-            params: {
-                json: { q: params }
-            }
-        };
-    }
+    var requestParams = {
+        options: options,
+        params: {
+            json: { q: params }
+        }
+    };
 
-    var APIRequest = require('../lib/apirequest');
-    var apiRequest = APIRequest(params, function(error, result) {
+    var apiRequest = APIRequest(requestParams, function(error, result) {
         if(!error) {
             if(result.body && result.body.data && result.body.data.detections) {
                 result = result.body.data.detections;
