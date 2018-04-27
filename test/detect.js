@@ -15,6 +15,7 @@ describe('detect()', function () {
         var text = "I am a Teapot and a Submarine";
 
         detectLanguage.detect(text, function(error, result) {
+            expect(error).to.be.null;
             expect(result[0].language).to.be.equal('en');
             done();
         });
@@ -28,6 +29,7 @@ describe('detect()', function () {
         ];
 
         detectLanguage.detect(texts, function(error, result) {
+            expect(error).to.be.null;
             expect(result[0][0].language).to.be.equal('en');
             done();
         });

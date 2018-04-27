@@ -13,7 +13,8 @@ describe('status()', function () {
 
     it('fetches account status', function (done) {
         detectLanguage.status(function(error, result) {
-            expect(result.status).to.be.a('string');
+            expect(error).to.be.null;
+            expect(result.status).to.be.string;
             done();
         });
     });

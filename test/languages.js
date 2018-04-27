@@ -13,8 +13,9 @@ describe('languages()', function () {
 
     it('fetches languages lists', function (done) {
         detectLanguage.languages(function(error, result) {
-            expect(result[0].code).to.be.a('string');
-            expect(result[0].name).to.be.a('string');
+            expect(error).to.be.null;
+            expect(result[0].code).to.be.string;
+            expect(result[0].name).to.be.string;
             done();
         });
     });
