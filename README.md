@@ -1,7 +1,7 @@
 Detect Language API
 ===
-[![Build Status](https://travis-ci.org/detectlanguage/detectlanguage-node.svg?branch=master)](https://travis-ci.org/detectlanguage/detectlanguage-node)
 [![npm](https://img.shields.io/npm/v/detectlanguage.svg)](https://www.npmjs.com/package/detectlanguage)
+[![Build Status](https://travis-ci.org/detectlanguage/detectlanguage-node.svg?branch=master)](https://travis-ci.org/detectlanguage/detectlanguage-node)
 
 JavaScript wrapper for [Language Detection API](https://detectlanguage.com/).
 
