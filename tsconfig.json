@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    "target": "ES5",
+    "module": "commonjs",
+    "strict": true,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src/",
+    "types": ["node", "mocha"]
+  },
+  "include": [
+    "src/**/*",
+  ]
+}

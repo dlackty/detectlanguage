@@ -1,4 +1,4 @@
-Language Detection API Node Client
+Language Detection API Node.js Client
 ===
 
 [![npm version](https://badge.fury.io/js/detectlanguage.svg)](https://badge.fury.io/js/detectlanguage)
