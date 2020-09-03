@@ -1,6 +1,6 @@
 import { Config } from './config';
 import { Client } from './client';
-import { Language } from './types';
+import { Language, UserStatus } from './types';
 
 export class DetectLanguageAPI {
   client: Client;
@@ -11,6 +11,10 @@ export class DetectLanguageAPI {
 
   async languages(): Promise<Language[]> {
     return this.client.get('languages');
+  }
+
+  async userStatus(): Promise<UserStatus> {
+    return this.client.get('user/status');
   }
 }
 
