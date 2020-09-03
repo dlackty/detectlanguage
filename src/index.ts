@@ -15,10 +15,10 @@ export class DetectLanguageAPI {
     return response.data.detections;
   }
 
-  async detectCode(text: string): Promise<string> {
+  async detectCode(text: string): Promise<string | null> {
     const results = await this.detect(text);
 
-    return results[0].language;
+    return results[0]?.language || null;
   }
 
   async detectBatch(texts: string[]): Promise<DetectionResult[][]> {

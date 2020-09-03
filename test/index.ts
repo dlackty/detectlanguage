@@ -24,6 +24,12 @@ describe('detectCode', function () {
 
     expect(result).to.eq('lt')
   });
+
+  it('handles not detected', async () => {
+    const result = await detectLanguage.detectCode('?');
+
+    expect(result).to.be.null;
+  });
 });
 
 describe('detectBatch', function () {
@@ -39,8 +45,8 @@ describe('languages', function () {
   it('fetches languages', async () => {
     const result = await detectLanguage.languages();
 
-    expect(result[0].code).to.be.string;
-    expect(result[0].name).to.be.string;
+    expect(result[0].code).to.be.a('string');
+    expect(result[0].name).to.be.a('string');
   });
 });
 
