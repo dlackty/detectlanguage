@@ -26,7 +26,7 @@ export class Client {
     })
   }
 
-  async get(path: string) {
+  async get(path: string): Promise<any> {
     const response = await this.connection.get(path)
 
     return response.data;
