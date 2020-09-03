@@ -8,11 +8,11 @@ export class Client {
   public connection: AxiosInstance;
 
   constructor(apiKey: string, config: Config) {
+    const timeout = config.timeout || 60;
     const protocol = config.protocol || 'https';
     const host = config.host || 'ws.detectlanguage.com';
     const apiVersion = config.apiVersion || '0.2';
     const baseURL = protocol + '://' + host + '/' + apiVersion + '/';
-    const timeout = config.timeout || 60;
 
     const headers = {
       'User-Agent': USER_AGENT,
