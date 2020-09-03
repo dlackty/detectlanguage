@@ -31,4 +31,10 @@ export class Client {
 
     return response.data;
   }
+
+  async post(path: string, data: any): Promise<any> {
+    const response = await this.connection.post(path, data);
+
+    return response.data;
+  }
 }

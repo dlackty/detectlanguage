@@ -1,3 +1,9 @@
+export interface DetectionResult {
+  language: string,
+  isReliable: boolean,
+  confidence: number,
+}
+
 export interface Language {
   code: string,
   name: string,

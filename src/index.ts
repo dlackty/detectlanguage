@@ -1,12 +1,30 @@
 import { Config } from './config';
 import { Client } from './client';
-import { Language, UserStatus } from './types';
+import { DetectionResult, Language, UserStatus } from './types';
 
 export class DetectLanguageAPI {
   client: Client;
 
   constructor(apiKey: string, config: Config = {}) {
     this.client = new Client(apiKey, config);
+  }
+
+  async detect(text: string): Promise<DetectionResult[]> {
+    const response = await this.client.post('detect', { q: text })
+
+    return response.data.detections;
+  }
+
+  async detectCode(text: string): Promise<string> {
+    const results = await this.detect(text);
+
+    return results[0].language;
+  }
+
+  async detectBatch(texts: string[]): Promise<DetectionResult[][]> {
+    const response = await this.client.post('detect', { q: texts })
+
+    return response.data.detections;
   }
 
   async languages(): Promise<Language[]> {
