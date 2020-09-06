@@ -1,56 +1,54 @@
-import DetectLanguage, { DetectLanguageAPI } from '../src/index';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
+import DetectLanguage from '../src';
+
 chai.use(chaiAsPromised);
 
-const API_KEY = process.env.DETECTLANGUAGE_API_KEY || '';
-let detectLanguage: DetectLanguageAPI;
+let detectLanguage;
 
 beforeEach(() => {
-  detectLanguage = DetectLanguage(API_KEY);
-})
+  detectLanguage = DetectLanguage(process.env.DETECTLANGUAGE_API_KEY || '');
+});
 
-describe('detect', function () {
+describe('detect', () => {
   it('detects language', async () => {
     const result = await detectLanguage.detect('labas rytas');
 
-    expect(result[0].language).to.eq('lt')
-    expect(result[0].isReliable).to.eq(true)
-    expect(result[0].confidence).to.be.a('number')
+    expect(result[0].language).to.eq('lt');
+    expect(result[0].isReliable).to.eq(true);
+    expect(result[0].confidence).to.be.a('number');
   });
 
   it('detects language', async () => {
     detectLanguage = DetectLanguage('invalid');
 
-    await expect(detectLanguage.detect('hello')).to.be.rejected;
-  });
-});
-
-describe('detectCode', function () {
-  it('detects language code', async () => {
-    const result = await detectLanguage.detectCode('vidur prūdo bliūdas plūdur');
-
-    expect(result).to.eq('lt')
+    await expect(detectLanguage.detect('hello')).to.be.rejectedWith('Invalid API key');
   });
 
-  it('handles not detected', async () => {
-    const result = await detectLanguage.detectCode('?');
-
-    expect(result).to.be.null;
-  });
-});
-
-describe('detectBatch', function () {
-  it('detects languages', async () => {
-    const result = await detectLanguage.detectBatch(['šešios žąsys', 'Strč prst skrz krk']);
+  it('works with batch', async () => {
+    const result = await detectLanguage.detect(['šešios žąsys', 'Strč prst skrz krk']);
 
     expect(result[0][0].language).to.eq('lt');
     expect(result[1][0].language).to.eq('cs');
   });
 });
 
-describe('languages', function () {
+describe('detectCode', () => {
+  it('detects language code', async () => {
+    const result = await detectLanguage.detectCode('vidur prūdo bliūdas plūdur');
+
+    expect(result).to.eq('lt');
+  });
+
+  it('handles not detected', async () => {
+    const result = await detectLanguage.detectCode('?');
+
+    expect(result).to.be.a('null');
+  });
+});
+
+describe('languages', () => {
   it('fetches languages', async () => {
     const result = await detectLanguage.languages();
 
@@ -59,7 +57,7 @@ describe('languages', function () {
   });
 });
 
-describe('userStatus', function () {
+describe('userStatus', () => {
   it('fetches user status', async () => {
     const result = await detectLanguage.userStatus();
 

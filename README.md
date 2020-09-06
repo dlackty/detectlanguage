@@ -4,7 +4,7 @@ Language Detection API Node.js Client
 [![npm version](https://badge.fury.io/js/detectlanguage.svg)](https://badge.fury.io/js/detectlanguage)
 [![Build Status](https://travis-ci.org/detectlanguage/detectlanguage-node.svg?branch=master)](https://travis-ci.org/detectlanguage/detectlanguage-node)
 
-JavaScript wrapper for [Language Detection API](https://detectlanguage.com/).
+Node.js wrapper for [Language Detection API](https://detectlanguage.com/).
 
 ## Installation
 
@@ -18,11 +18,7 @@ Before using Detect Language API client you have to setup your personal API key.
 You can get it by signing up at [detectlanguage.com](https://detectlanguage.com)
 
 ```javascript
-var DetectLanguage = require('detectlanguage');
-var detectLanguage = new DetectLanguage({
-    key: '[INSERT YOUR KEY HERE]',
-    ssl: true|false (defaults to TRUE)
-});
+var detectlanguage = require('detectlanguage')('YOUR API KEY');
 ```
 
 ## Usage
@@ -32,83 +28,10 @@ var detectLanguage = new DetectLanguage({
 Takes a text string and returns a list of detections.
 
 ```javascript
-var text = "I am a Teapot and a Submarine";
-detectLanguage.detect(text, function(error, result) {
-    console.log(JSON.stringify(result));
-});
-```
+var text = "Hello! How are you?";
 
-#### Response
-
-```javascript
-{
-  data: {
-    detections: [
-      {
-        language: "en",
-        isReliable: true,
-        confidence: 7.85
-      }
-    ]
-  }
-}
-```
-
-### Batch Detection (recommended)
-
-Takes an array of texts and returns a list of detections.
-It is much faster than doing request for each text individually.
-
-```javascript
-var texts = [
-    "I am a Teapot and a Submarine",
-    "Soy una tetera y un submarino",
-    "Jeg er en tekande og en ubåd"
-]
-detectLanguage.detect(texts, function(error, result) {
-    console.log(JSON.stringify(result));
-});
-```
-
-#### Response
-
-```javascript
-{
-  data: {
-    detections: [
-      [
-        {
-          language: "en",
-          isReliable: true,
-          confidence: 7.85
-        }
-      ],
-      [
-        {
-          language: "es",
-          isReliable: true,
-          confidence: 3.75
-        }
-      ],
-      [
-        {
-          language: "da",
-          isReliable: true,
-          confidence: 4.09
-        }
-      ]
-    ]
-  }
-}
-```
-
-### Supported Languages
-
-Returns the list of supported languages.
-
-```javascript
-detectLanguage.languages(function(error, result) {
-    console.log(JSON.stringify(result));
+detectlanguage.detect(text).then(function(result) {
+  console.log(JSON.stringify(result));
 });
 ```
 
@@ -117,12 +40,87 @@ detectLanguage.languages(function(error, result) {
 ```javascript
 [
   {
-    code: "ab",
-    name: "ABKHAZIAN"
-  },
+    "language": "en",
+    "isReliable": true,
+    "confidence": 18.2
+  }
+]
+```
+
+### Batch Detection (recommended)
+
+Takes an array of texts and returns a list of detections.
+It is much faster than doing request for each text individually.
+
+```javascript
+var texts = ['šešios žąsys', 'Strč prst skrz krk'];
+
+detectlanguage.detect(texts).then(function(result) {
+  console.log(JSON.stringify(result));
+});
+```
+
+#### Response
+
+```javascript
+[
+  [
+    {
+      "language": "lt",
+      "isReliable": true,
+      "confidence": 5.5
+    }
+  ],
+  [
+    {
+      "language": "cs",
+      "isReliable": true,
+      "confidence": 3.645
+    },
+    ...
+  ]
+]
+```
+
+### Language Code Detection 
+
+Returns first detected language code.
+
+```javascript
+var text = "Hello! How are you?";
+
+detectlanguage.detectCode(text).then(function(result) {
+  console.log(JSON.stringify(result));
+});
+```
+
+#### Response
+
+```javascript
+"en"
+```
+
+### Supported Languages
+
+Returns the list of supported languages.
+
+```javascript
+detectlanguage.languages().then(function(result) {
+  console.log(JSON.stringify(result));
+});
+```
+
+#### Response
+
+```javascript
+[
   {
     code: "aa",
     name: "AFAR"
+  },
+  {
+    code: "ab",
+    name: "ABKHAZIAN"
   },
   {
     code: "af",
@@ -137,8 +135,8 @@ detectLanguage.languages(function(error, result) {
 Returns information about your account and it's status.
 
 ```javascript
-detectLanguage.status(function(error, result) {
-    console.log(JSON.stringify(result));
+detectlanguage.userStatus().then(function(result) {
+  console.log(JSON.stringify(result));
 });
 ```
 
@@ -146,12 +144,12 @@ detectLanguage.status(function(error, result) {
 
 ```javascript
 {
-  date: "2015-02-21",
+  date: "2020-01-01",
   requests: 31,
   bytes: 429,
   plan: "FREE",
   plan_expires: null,
-  daily_requests_limit: 5000,
+  daily_requests_limit: 1000,
   daily_bytes_limit: 1048576,
   status: "ACTIVE"
 }
@@ -159,8 +157,8 @@ detectLanguage.status(function(error, result) {
 
 ## Author
 
-Peter Andreas Moelgaard ([GitHub](https://github.com/pmoelgaard), [Twitter](https://twitter.com/petermoelgaard))
+Laurynas Butkus ([GitHub](https://github.com/laurynas)
 
 ## License
 
-Licensed under the Apache License, Version 2.0: [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+Licensed under the MIT License: [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT)
