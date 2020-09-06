@@ -1,3 +1,10 @@
+export interface Config {
+  timeout?: number,
+  protocol?: string,
+  host?: string,
+  apiVersion?: string,
+}
+
 export interface DetectionResult {
   language: string,
   isReliable: boolean,

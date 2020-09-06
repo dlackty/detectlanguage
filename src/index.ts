@@ -1,6 +1,7 @@
-import { Config } from './config';
 import { Client } from './client';
-import { DetectionResult, Language, UserStatus } from './types';
+import { Config, DetectionResult, Language, UserStatus } from './types';
+
+export * from './types';
 
 export class DetectLanguageError extends Error {}
 

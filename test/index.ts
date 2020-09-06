@@ -1,4 +1,4 @@
-import DetectLanguage, { DetectLanguageAPI, DetectLanguageError } from '../src/index';
+import DetectLanguage, { DetectLanguageAPI } from '../src/index';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 

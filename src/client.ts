@@ -1,4 +1,4 @@
-import { Config } from './config';
+import { Config } from './types';
 import { DetectLanguageError } from './index';
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
