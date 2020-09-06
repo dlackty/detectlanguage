@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Detect Language API Node.js Client",
   "main": "./lib/index.js",
-  "types": "./types/index.d.ts",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "clean": "rimraf lib .nyc_output node_modules/.cache coverage",
     "test": "yarn lint && yarn mocha",
@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.2.12",
+    "@types/chai-as-promised": "^7.1.3",
     "@types/mocha": "^8.0.3",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",

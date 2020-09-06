@@ -1,5 +1,8 @@
-import DetectLanguage, { DetectLanguageAPI } from '../src/index';
-import { expect } from 'chai';
+import DetectLanguage, { DetectLanguageAPI, DetectLanguageError } from '../src/index';
+import chai, { expect } from 'chai';
+import chaiAsPromised from 'chai-as-promised';
+
+chai.use(chaiAsPromised);
 
 const API_KEY = process.env.DETECTLANGUAGE_API_KEY || '';
 let detectLanguage: DetectLanguageAPI;
@@ -15,6 +18,12 @@ describe('detect', function () {
     expect(result[0].language).to.eq('lt')
     expect(result[0].isReliable).to.eq(true)
     expect(result[0].confidence).to.be.a('number')
+  });
+
+  it('detects language', async () => {
+    detectLanguage = DetectLanguage('invalid');
+
+    await expect(detectLanguage.detect('hello')).to.be.rejected;
   });
 });
 

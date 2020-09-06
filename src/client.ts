@@ -1,14 +1,15 @@
 import { Config } from './config';
-import axios, { AxiosInstance } from 'axios';
+import { DetectLanguageError } from './index';
+import axios, { AxiosInstance, AxiosError } from 'axios';
 
 const { version } = require('../package.json');
 const USER_AGENT = 'detectlanguage-node/' + version;
 
 export class Client {
-  public connection: AxiosInstance;
+  private connection: AxiosInstance;
 
   constructor(apiKey: string, config: Config) {
-    const timeout = config.timeout || 60;
+    const timeout = (config.timeout || 60) * 1000;
     const protocol = config.protocol || 'https';
     const host = config.host || 'ws.detectlanguage.com';
     const apiVersion = config.apiVersion || '0.2';
@@ -19,22 +20,35 @@ export class Client {
       'Authorization': 'Bearer ' + apiKey,
     }
 
-    this.connection = axios.create({
-      baseURL,
-      headers,
-      timeout: timeout * 1000,
-    })
+    this.connection = axios.create({ baseURL, headers, timeout });
   }
 
   async get(path: string): Promise<any> {
-    const response = await this.connection.get(path)
+    try {
+      const response = await this.connection.get(path)
 
-    return response.data;
+      return response.data;
+    } catch(e) {
+      this.handleError(e);
+    }
   }
 
   async post(path: string, data: unknown): Promise<any> {
-    const response = await this.connection.post(path, data);
+    try {
+      const response = await this.connection.post(path, data);
 
-    return response.data;
+      return response.data;
+    } catch(e) {
+      this.handleError(e);
+    }
+  }
+
+  private handleError(error: AxiosError) {
+    const message = error?.response?.data?.error?.message || error.message;
+    const apiError = new DetectLanguageError(message);
+
+    apiError.stack = error.stack;
+
+    throw(apiError);
   }
 }

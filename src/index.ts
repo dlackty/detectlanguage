@@ -2,6 +2,8 @@ import { Config } from './config';
 import { Client } from './client';
 import { DetectionResult, Language, UserStatus } from './types';
 
+export class DetectLanguageError extends Error {}
+
 export class DetectLanguageAPI {
   client: Client;
 
@@ -36,6 +38,8 @@ export class DetectLanguageAPI {
   }
 }
 
-export default (apiKey: string, config: Config = {}): DetectLanguageAPI => {
+const DetectLanguageAPIConstructor = (apiKey: string, config: Config = {}): DetectLanguageAPI => {
   return new DetectLanguageAPI(apiKey, config);
 }
+
+export default DetectLanguageAPIConstructor;
