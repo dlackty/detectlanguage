@@ -5,7 +5,6 @@ import { handleError } from './error';
 export default class Client {
   constructor(apiKey, options) {
     const config = { ...defaults, ...options };
-    const baseURL = `${config.protocol}://${config.host}/${config.apiVersion}/`;
 
     const headers = {
       'User-Agent': config.userAgent,
@@ -14,7 +13,7 @@ export default class Client {
 
     this.connection = axios.create({
       headers,
-      baseURL,
+      baseURL: `${config.protocol}://${config.host}/${config.apiVersion}/`,
       timeout: config.timeout * 1000,
     });
   }
