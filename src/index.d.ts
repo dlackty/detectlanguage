@@ -28,23 +28,16 @@ export interface UserStatus {
 }
 
 export interface Client {
-  get(path: string): Promise<any>;
-  post(path: string, data: any): Promise<any>;
+  async get(path: string): any;
+  async post(path: string, data: any): any;
 }
 
-export interface APIInstance {
+export default class DetectLanguage {
   client: Client;
-  detect(text: string): Promise<DetectionResult[]>;
+  constructor (apiKey: string, options?: Options);
+  detect(text: string): Promise<DetectionResult[]>
   detect(text: string[]): Promise<DetectionResult[][]>;
   detectCode(text: string): Promise<string | null>;
   languages(): Promise<Language[]>;
   userStatus(): Promise<UserStatus>;
 }
-
-export interface APIStatic {
-  (apiKey: string, options?: Options): APIInstance;
-}
-
-declare const API: APIStatic;
-
-export default API;

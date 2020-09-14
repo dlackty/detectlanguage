@@ -18,7 +18,9 @@ Before using Detect Language API client you have to setup your personal API key.
 You can get it by signing up at [detectlanguage.com](https://detectlanguage.com)
 
 ```javascript
-var detectlanguage = require('detectlanguage')('YOUR API KEY');
+var DetectLanguage = require('detectlanguage');
+
+var detectlanguage = new DetectLanguage('YOUR API KEY');
 ```
 
 ## Usage

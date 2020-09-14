@@ -26,6 +26,4 @@ class API {
   }
 }
 
-const init = (apiKey, options = {}) => new API(apiKey, options);
-
-module.exports = init;
+module.exports = API;

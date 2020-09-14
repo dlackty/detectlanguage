@@ -8,7 +8,7 @@ chai.use(chaiAsPromised);
 let detectLanguage;
 
 beforeEach(() => {
-  detectLanguage = DetectLanguage(process.env.DETECTLANGUAGE_API_KEY || '');
+  detectLanguage = new DetectLanguage(process.env.DETECTLANGUAGE_API_KEY || '');
 });
 
 describe('detect', () => {
@@ -21,7 +21,7 @@ describe('detect', () => {
   });
 
   it('detects language', async () => {
-    detectLanguage = DetectLanguage('invalid');
+    detectLanguage = new DetectLanguage('invalid');
 
     await expect(detectLanguage.detect('hello')).to.be.rejectedWith('Invalid API key');
   });

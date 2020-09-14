@@ -1,4 +1,6 @@
-var detectlanguage = require('../lib')(process.env.DETECTLANGUAGE_API_KEY);
+var DetectLanguage = require('../lib/');
+
+var detectlanguage = new DetectLanguage(process.env.DETECTLANGUAGE_API_KEY);
 
 var texts = ['šešios žąsys', 'Strč prst skrz krk'];
 
