@@ -36,8 +36,9 @@ export interface Client {
 
 export interface APIInstance {
   client: Client;
-  detect(text: (string | string[])): (Promise<DetectionResult[]> | Promise<DetectionResult[][]>);
-  detectCode(text: string): (Promise<string> | Promise<null>);
+  detect(text: string): Promise<DetectionResult[]>;
+  detect(text: string[]): Promise<DetectionResult[][]>;
+  detectCode(text: string): Promise<string> | Promise<null>;
   languages(): Promise<Language[]>;
   userStatus(): Promise<UserStatus>;
 }
