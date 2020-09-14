@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Detect Language API Node.js Client",
   "main": "./lib/index.js",
-  "types": "./types.ts",
+  "types": "./src/index.d.ts",
   "scripts": {
     "clean": "rimraf lib .nyc_output node_modules/.cache coverage",
     "test": "yarn lint && yarn mocha --require @babel/register",
