@@ -1,5 +1,3 @@
-import Client from "./client";
-
 export interface Options {
   timeout?: number,
   protocol?: string,
