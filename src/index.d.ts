@@ -28,8 +28,8 @@ export interface UserStatus {
 }
 
 export interface Client {
-  async get(path: string): any;
-  async post(path: string, data: any): any;
+  get(path: string): Promise<any>;
+  post(path: string, data: any): Promise<any>;
 }
 
 export default class DetectLanguage {
