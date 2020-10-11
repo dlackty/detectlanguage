@@ -1,10 +1,10 @@
-Language Detection API Node.js Client
+Detect Language API Node.js Client
 ===
 
 [![npm version](https://badge.fury.io/js/detectlanguage.svg)](https://badge.fury.io/js/detectlanguage)
 [![Build Status](https://travis-ci.org/detectlanguage/detectlanguage-node.svg?branch=master)](https://travis-ci.org/detectlanguage/detectlanguage-node)
 
-Node.js wrapper for the [Language Detection API](https://detectlanguage.com/).
+Node.js wrapper for the [Detect Language API](https://detectlanguage.com/).
 
 ## Installation
 
