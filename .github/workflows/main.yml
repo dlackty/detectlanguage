@@ -6,10 +6,9 @@ jobs:
     strategy:
       matrix:
         node-version:
+          - 18
           - 14
-          - 13
           - 12
-          - 11
           - 10
     name: Node ${{ matrix.node-version }} sample
     steps:
