@@ -8,7 +8,7 @@
     "clean": "rimraf lib .nyc_output node_modules/.cache coverage",
     "test": "yarn lint && yarn mocha --require @babel/register",
     "mocha": "nyc mocha",
-    "lint": "eslint src test",
+    "lint": "yarn run eslint src test",
     "build": "babel src --out-dir lib"
   },
   "files": [
